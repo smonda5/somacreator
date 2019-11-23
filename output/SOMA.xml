@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope" xmlns:man="http://www.datapower.com/schemas/management" xmlns:env="http://www.w3.org/2003/05/soap-envelope">
+  <soapenv:Header/>
+  <soapenv:Body>
+    <man:request domain="default">
+      <man:set-config>
+        <WSEndpointRewritePolicy name="sush_wsp">
+          <mAdminState>enabled</mAdminState>
+          <WSEndpointLocalRewriteRule>
+            <ServicePortMatchRegexp>^{https://namespaces.snowboard-info.com:443}GetEndorsingBoarderPort$</ServicePortMatchRegexp>
+            <LocalEndpointProtocol>default</LocalEndpointProtocol>
+            <LocalEndpointHostname>0.0.0.0</LocalEndpointHostname>
+            <LocalEndpointPort>0</LocalEndpointPort>
+            <LocalEndpointURI>/EndorsementSearch</LocalEndpointURI>
+            <FrontProtocol class="HTTPSourceProtocolHandler">SAMPLE_FSH</FrontProtocol>
+            <UseFrontProtocol>on</UseFrontProtocol>
+            <WSDLBindingProtocol>soap-11</WSDLBindingProtocol>
+            <FrontsidePortSuffix/>
+          </WSEndpointLocalRewriteRule>
+          <WSEndpointRemoteRewriteRule>
+            <ServicePortMatchRegexp>^{https://namespaces.snowboard-info.com:443}GetEndorsingBoarderPort$</ServicePortMatchRegexp>
+            <RemoteEndpointProtocol>https</RemoteEndpointProtocol>
+            <RemoteEndpointHostname>www.snowboard-info.com</RemoteEndpointHostname>
+            <RemoteEndpointPort>443</RemoteEndpointPort>
+            <RemoteEndpointURI>/EndorsementSearch</RemoteEndpointURI>
+            <RemoteMQQM/>
+            <RemoteTibcoEMS/>
+            <RemoteWebSphereJMS/>
+          </WSEndpointRemoteRewriteRule>
+          <WSEndpointLocalRewriteRule>
+            <ServicePortMatchRegexp>^{http://www.examples.com/wsdl/HelloService.wsdl}Hello_Port$</ServicePortMatchRegexp>
+            <LocalEndpointProtocol>default</LocalEndpointProtocol>
+            <LocalEndpointHostname>0.0.0.0</LocalEndpointHostname>
+            <LocalEndpointPort>0</LocalEndpointPort>
+            <LocalEndpointURI>/SayHello/</LocalEndpointURI>
+            <FrontProtocol class="HTTPSourceProtocolHandler">SAMPLE_FSH</FrontProtocol>
+            <UseFrontProtocol>on</UseFrontProtocol>
+            <WSDLBindingProtocol>soap-11</WSDLBindingProtocol>
+            <FrontsidePortSuffix/>
+          </WSEndpointLocalRewriteRule>
+          <WSEndpointRemoteRewriteRule>
+            <ServicePortMatchRegexp>^{http://www.examples.com/wsdl/HelloService.wsdl}Hello_Port$</ServicePortMatchRegexp>
+            <RemoteEndpointProtocol>http</RemoteEndpointProtocol>
+            <RemoteEndpointHostname>www.examples.com</RemoteEndpointHostname>
+            <RemoteEndpointPort>80</RemoteEndpointPort>
+            <RemoteEndpointURI>/SayHello/</RemoteEndpointURI>
+            <RemoteMQQM/>
+            <RemoteTibcoEMS/>
+            <RemoteWebSphereJMS/>
+          </WSEndpointRemoteRewriteRule>
+        </WSEndpointRewritePolicy>
+        <WSGateway name="sush_wsp">
+          <EndpointRewritePolicy class="WSEndpointRewritePolicy">sush_wsp</EndpointRewritePolicy>
+          <StylePolicy class="WSStylePolicy">sush_wsp</StylePolicy>
+          <BaseWSDL>
+            <WSDLSourceLocation>local:///WSDLDirectory</WSDLSourceLocation>
+            <WSDLName>SampleServiceV1.wsdl</WSDLName>
+            <PolicyAttachments/>
+          </BaseWSDL>
+          <BaseWSDL>
+            <WSDLSourceLocation>local:///WSDLDirectory</WSDLSourceLocation>
+            <WSDLName>SampleServiceV2.wsdl</WSDLName>
+            <PolicyAttachments/>
+          </BaseWSDL>
+        </WSGateway>
+      </man:set-config>
+    </man:request>
+  </soapenv:Body>
+</soapenv:Envelope>

@@ -1,0 +1,19 @@
+<definitions name="EndorsementSearch"
+  targetNamespace="http://namespaces.snowboard-info.com"
+  xmlns:es="http://www.snowboard-info.com/EndorsementSearch.wsdl"
+  xmlns:esxsd="http://schemas.snowboard-info.com/EndorsementSearch.xsd"
+  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+  xmlns="http://schemas.xmlsoap.org/wsdl/"
+>
+
+  <service name="EndorsementSearchService">
+    <documentation>snowboarding-info.com Endorsement Service</documentation>
+    <port name="GetEndorsingBoarderPort"
+          binding="es:EndorsementSearchSoapBinding">
+      <soap:address location="https://www.snowboard-info.com/EndorsementSearch"/>
+    </port>
+  </service>
+
+  <import namespace="https://namespaces.snowboard-info.com:443" location="SampleServiceV1.wsdl" />
+
+</definitions>
